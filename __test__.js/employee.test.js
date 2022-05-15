@@ -10,8 +10,47 @@ describe("Employee", () => {
 // Assert
 expect(typeof employee).toBe("object");
 });
-});
 
+it ("should set name via constructor arguments", ()=>{
+// arrange
+const name =  "Virginia"
+// act
+const employee = new Employee(name)
+// assert
+expect(employee.name).toBe(name);
+});
+it ("should set id via constructor arguments", ()=>{
+  // arrange
+  const id =  100;
+  // act
+  const employee = new Employee("Virginia", id)
+  // assert
+  expect(employee.id ).toBe(id);
+  });
+  
+  it("should set email via constructor arguments", ()=> {
+    //  arrange
+    const email = "test@test.com";
+  
+    // act 
+    const employee = new Employee("Virginia", 100, email);
+    // assert
+    expect(employee.id)toBe(id);
+  });
+};
+
+describe("Getter methods", ()=> {
+  it("should get name via getName()",() => {
+    // arrange
+    const name = "Virginia";
+    // act
+    const employee = new Employee(name, 100,"test@test.com");
+    // assert
+    expect(employee.email).toBe(email);
+  });
+});
+});
+  
 // // test("Can instantiate Employee instance", () => {
 // //   const e = new Employee();
 // //   expect(typeof e).toBe("object");
