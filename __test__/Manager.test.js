@@ -1,4 +1,3 @@
-const { DESCRIBE } = require("sequelize/types/query-types");
 const Manager = require("../lib/Manager");
 
 describe("Manager", () => {
@@ -13,7 +12,7 @@ describe("Manager", () => {
     });
 
     describe("Getter methods", () => {
-      it("should get office number via get office()", () => {
+      it("should get office number via getoffice()", () => {
         // arrange
         const officeNumber = 100;
         // act
@@ -23,9 +22,9 @@ describe("Manager", () => {
           "test@test.com",
           officeNumber
         );
-        const managerOfficeNumber = manager.getOffice();
+        const OfficeNumber = manager.getOffice();
         // assert
-        expect(managerofficeNumber).tobe(officeNumber);
+        expect(manager.officeNumber).tobe(officeNumber);
       });
 
       it("should get role via getRole()", () => {

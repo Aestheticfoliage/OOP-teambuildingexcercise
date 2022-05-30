@@ -78,7 +78,7 @@ describe("Employee", () => {
       const employee = new Employee("Virginia", 100, "test@test.com");
       const employeeRole = employee.getRole();
       // assert
-      expect(employeeRole).toBe(role);
+      expect(employee.Role).toBe(role);
     });
   });
 });
