@@ -1,11 +1,11 @@
 const inquirer = require(inquirer);
 const fs = require("fs");
-const generateTeam = require("./src/page-template.js");
+// const generateTeam = require("./src/page-template.js");
 
 //lib modules
-const Engineer = require("./src/Engineer");
-const Intern = require("./src/Intern");
-const Manager = require("./src/Manager");
+const Engineer = require("./lib/Engineer");
+const Intern = require("./lib/Intern");
+const Manager = require("./lib/Manager");
 
 //Array for answers to questions
 const newStaffMemberData = [];
@@ -65,49 +65,49 @@ const questions = async () => {
       githubAns.github
     );
     newStaffMemberData.push(newEngineer);
+  } else if (answers.role === "Intern") {
+    const internAns = await inquirer.prompt([
+      {
+        type: "input",
+        message: "What university did you attend?",
+        name: "school",
+      },
+    ]);
+
+    const newIntern = new Intern(
+      answers.name,
+      answers.id,
+      answers.email,
+      internAns.school
+    );
+    newStaffMemberData.push(newIntern);
   }
-}; else if (answers.role === "Intern"){
-  const internAns = await inquirer
-  .prompt([
-    {
-      type:"input",
-      message: "What university did you attend?",
-      name: "school",
-    },
-  ])
+  async function promptQuestions() {
+    await questions();
 
-  const newIntern = new Intern(
-  answers.name,
-  answers.id,
-  answers.email,
-  internAns.school,
-);
-newStaffMemberData.push(newIntern);
-}
-async function promptQuestions() {
-  await questions();
-
-  const addMemberAns = await inquirer
-  .prompt([
-    {
-      name: "addMember",
-      type: "list",
-      choices: ["Add a new member", "Create team"],
-      message: "What would you like to do next?",
-    },
-  ]);
-  if (addMemberAns.addMember === "Add a new member") {
-    return promptQuestions();
+    const addMemberAns = await inquirer.prompt([
+      {
+        name: "addMember",
+        type: "list",
+        choices: ["Add a new member", "Create team"],
+        message: "What would you like to do next?",
+      },
+    ]);
+    if (addMemberAns.addMember === "Add a new member") {
+      return promptQuestions();
+    }
+    return createTeam();
   }
-  return createTeam();
-}
-promptQuestions();
+  promptQuestions();
 
-function createTeam() {
-  console.log("new guy", newStaffMemberData);
-  fs.writeFileSync(
-    "./output/index.html",
-    generateTeam(newStaffMemberData),
-    "utf-8"
-  );
-}
+  function createTeam() {
+    console.log("new guy", newStaffMemberData);
+    fs.writeFileSync(
+      "./output/index.html",
+      generateTeam(newStaffMemberData),
+      "utf-8"
+    );
+  }
+};
+
+(module.exports = newStaffMemberData), newManager;
